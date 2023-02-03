@@ -1,0 +1,35 @@
+{
+  "name": "All general snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "css",
+        "path": "./css.json"
+      },
+      {
+        "language": "html",
+        "path": "./html.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./javascript.json"
+      },
+      {
+        "language": "markdown",
+        "path": "./markdown.json"
+      },
+      {
+        "language": "lua",
+        "path": "./lua.json"
+      },
+      {
+        "language": "rust",
+        "path": "./rust.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./typescript.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+	"name": "Angular snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "dockerfile",
+        "path": "./dockerfile.json"
+      },
+      {
+        "language": "html",
+        "path": "./html.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./javascript.json"
+      },
+      {
+        "language": "jsonc",
+        "path": "jsonc.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./typescript.json"
+      }
+    ]
+  }
+}
