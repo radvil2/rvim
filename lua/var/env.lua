@@ -23,25 +23,11 @@ M.g = {
 }
 
 M.theme = {
-  colorscheme = "catppuccin",
-  colorvariant = "mocha",
+  colorscheme = "tokyonight",
+  colorvariant = "moon",
   transparentbg = false,
   darkmode = true,
   icons = {},
-}
-
--- @deprecated
-M.session_manager = {
-  enable = true,
-  commands = {
-    save = "SSave",
-    load = "SLoad",
-    close = "SClose",
-    delete = "SDelete",
-    show = "SShow",
-    list = "SList",
-    migrate = "SMigrate",
-  },
 }
 
 M.editor = {
@@ -50,21 +36,6 @@ M.editor = {
     style = "thin",
     show_indicators = true,
     show_buffer_close = false,
-    keymaps = {
-      n = {
-        ["<A-b>"] = "<Cmd>BufferLinePick<CR>",
-        ["<A-[>"] = "<Cmd>BufferLineMovePrev<CR>",
-        ["<A-]>"] = "<Cmd>BufferLineMoveNext<CR>",
-        ["<A-,>"] = "<Cmd>BufferLineCyclePrev<CR>",
-        ["<A-.>"] = "<Cmd>BufferLineCycleNext<CR>",
-        ["<Leader>P"] = "<Cmd>BufferLineTogglePin<CR>",
-        ["<A-1>"] = "<Cmd>BufferLineGoToBuffer 1<CR>",
-        ["<A-2>"] = "<Cmd>BufferLineGoToBuffer 2<CR>",
-        ["<A-3>"] = "<Cmd>BufferLineGoToBuffer 3<CR>",
-        ["<A-4>"] = "<Cmd>BufferLineGoToBuffer 4<CR>",
-        ["<A-5>"] = "<Cmd>BufferLineGoToBuffer 5<CR>",
-      },
-    },
   },
   sidebar = {
     width = 66,
@@ -82,34 +53,30 @@ M.editor = {
     show_relativenumber = false,
     show_diagnostics_icons = true,
     hightlight_opened_files = "name",
-    keymaps = {
-      n = {
-        ["Q"] = "<CMD>NvimTreeFindFile<CR>",
-        ["<R>"] = "<CMD>NvimTreeRefresh<CR>",
-        ["<Leader>q"] = "<CMD>NvimTreeToggle<CR>",
-        ["<Leader>`"] = "<CMD>NvimTreeCollapse<CR>",
-      },
-    },
   },
   statusline = {
     enable = true,
     is_global = true,
-    variant = "slanted",
-    disabled_filetypes = { "help", "dashboard" },
-	},
-	symbols_outline = {
-		enable = true,
-	}
+    variant = "rainbow",
+    disabled_filetypes = {
+      "dashboard",
+      "NvimTree",
+      "help",
+    },
+  },
+  symbols_outline = {
+    enable = true,
+  },
 }
 
 M.finder = {
-	wordjump = {
-		enable = true,
-		keymap = "<Leader>j",
-	},
-	illuminate = {
-		enable = true,
-	}
+  wordjump = {
+    enable = true,
+    keymap = "<Leader>j",
+  },
+  illuminate = {
+    enable = true,
+  },
 }
 
 M.treesitter = {
@@ -163,7 +130,7 @@ M.lsp = {
       ToggleSymbolOutlinesMap = "gM",
       ToggleFloatingTerminal = "gT",
     },
-		opts = {}
+    opts = {},
   },
   servers = {
     "cssls",

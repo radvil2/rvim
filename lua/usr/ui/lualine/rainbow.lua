@@ -1,10 +1,8 @@
-local M = {}
-
 local icons = require("media.icons")
 local palette = require("media.colors").palette
 local vmodecolor = require("media.colors").vim_mode
-local utils = require("usr.editor.lualine._utils")
-local default_hl = vim.api.nvim_get_hl_by_name("TabLineFill", true)
+local utils = require("usr.ui.lualine.utils")
+local default_hl = Api.nvim_get_hl_by_name("TabLineFill", true)
 local env = Env.editor.statusline
 local bgcolor = palette.bg
 
@@ -12,27 +10,44 @@ if default_hl.background ~= nil then
 	bgcolor = string.format("#%06x", default_hl.background)
 end
 
-M.opts = {
-	options = {
-		disabled_filetypes = env.disabled_filetypes,
-		globalstatus = env.is_global or false,
-		component_separators = "",
-		section_separators = "",
-		icons_enabled = true,
-		theme = "auto",
-	},
-	sections = {
-		lualine_c = {},
-		lualine_x = {},
-	},
+local M = {}
+
+M.options = {
+	disabled_filetypes = env.disabled_filetypes,
+	globalstatus = env.is_global or false,
+	component_separators = "",
+	section_separators = "",
+	icons_enabled = true,
+	theme = "auto",
 }
 
 M.sections = {
-	left = {},
-	right = {},
+	lualine_a = {},
+	lualine_b = {},
+	lualine_y = {},
+	lualine_z = {},
+	lualine_c = {},
+	lualine_x = {},
 }
 
-table.insert(M.sections.left, {
+M.inactive_sections = {
+	lualine_a = {},
+	lualine_b = {},
+	lualine_y = {},
+	lualine_z = {},
+	lualine_c = {},
+	lualine_x = {},
+}
+
+local function insert_left(changes)
+	table.insert(M.sections.lualine_c, changes or {})
+end
+
+local function insert_right(changes)
+	table.insert(M.sections.lualine_x, changes or {})
+end
+
+insert_left({
 	"mode",
 	fmt = function(str)
 		return icons.Misc.Vim .. str
@@ -46,7 +61,7 @@ table.insert(M.sections.left, {
 	end,
 })
 
-table.insert(M.sections.left, {
+insert_left({
 	function()
 		return icons.Chevron.RightBigFilled
 	end,
@@ -60,7 +75,7 @@ table.insert(M.sections.left, {
 })
 
 -- Git Branch
-table.insert(M.sections.left, {
+insert_left({
 	"branch",
 	icon = icons.Common.Git,
 	color = {
@@ -76,7 +91,7 @@ table.insert(M.sections.left, {
 	end,
 })
 
-table.insert(M.sections.left, {
+insert_left({
 	"filename",
 	padding = 0,
 	cond = IsBufferNotEmpty,
@@ -125,51 +140,39 @@ table.insert(M.sections.left, {
 	end,
 })
 
-table.insert(M.sections.left, {
+insert_left({
 	"filesize",
 	cond = IsBufferNotEmpty,
-	padding = {
-		right = 1,
-		left = 1,
-	},
-	color = {
-		fg = palette.blue,
-	},
+	padding = { right = 1, left = 1, },
+	color = { fg = palette.blue, },
 	fmt = function(filesize)
 		return "🧷 " .. filesize .. " "
 	end,
 })
 
-table.insert(M.sections.left, {
+insert_left({
 	"diagnostics",
-	sources = {
-		"nvim_diagnostic",
-	},
+	sources = { "nvim_diagnostic", },
 	symbols = {
 		error = icons.Diagnostics.Error,
 		warn = icons.Diagnostics.Warn,
 		info = icons.Diagnostics.Info,
 	},
 	diagnostics_color = {
-		color_error = {
-			fg = palette.red,
-		},
-		color_warn = {
-			fg = palette.yellow,
-		},
-		color_info = {
-			fg = palette.cyan,
-		},
+		color_error = { fg = palette.red, },
+		color_info = { fg = palette.cyan, },
+		color_warn = { fg = palette.yellow, },
 	},
 })
 
-table.insert(M.sections.left, {
+-- middle separator
+insert_left({
 	function()
 		return "%="
 	end,
 })
 
-table.insert(M.sections.right, {
+insert_right({
 	"lsp_progress",
 	display_components = {
 		"lsp_client_name",
@@ -184,9 +187,9 @@ table.insert(M.sections.right, {
 })
 
 -- Attached Lsp server's name
-table.insert(M.sections.right, {
+insert_right({
 	function()
-		return utils.get_server_names()
+		return utils.get_server_names() --TODO: recreate this func
 	end,
 	fmt = function(serverName)
 		-- return "🚀 ≪ " .. serverName .. " ≫"
@@ -197,28 +200,22 @@ table.insert(M.sections.right, {
 	},
 })
 
-table.insert(M.sections.right, {
+insert_right({
 	"diff",
+	cond = IsGitWorkspace,
 	symbols = {
 		added = icons.Git.Untracked .. " ",
 		modified = icons.Git.Unstaged .. " ",
 		removed = icons.Git.Deleted .. " ",
 	},
 	diff_color = {
-		added = {
-			fg = palette.green,
-		},
-		modified = {
-			fg = palette.yellow,
-		},
-		removed = {
-			fg = palette.red,
-		},
+		added = { fg = palette.green, },
+		modified = { fg = palette.yellow, },
+		removed = { fg = palette.red, },
 	},
-	cond = IsGitWorkspace,
 })
 
-table.insert(M.sections.right, {
+insert_right({
 	"progress",
 	padding = 0,
 	color = {
@@ -230,7 +227,7 @@ table.insert(M.sections.right, {
 	end,
 })
 
-table.insert(M.sections.right, {
+insert_right({
 	"location",
 	padding = 0,
 	color = {
@@ -242,7 +239,7 @@ table.insert(M.sections.right, {
 	end,
 })
 
-table.insert(M.sections.right, {
+insert_right({
 	function()
 		return icons.Common.Block
 	end,
@@ -253,15 +250,5 @@ table.insert(M.sections.right, {
 		}
 	end,
 })
-
--- for _, left_component in ipairs(M.sections.left) do
--- 	table.insert(M.opts.sections.lualine_c, left_component)
--- end
---
--- for _, right_component in ipairs(M.sections.right) do
--- 	table.insert(M.opts.sections.lualine_x, right_component)
--- end
-M.opts.sections.lualine_c = M.sections.left
-M.opts.sections.lualine_x = M.sections.right
 
 return M

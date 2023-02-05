@@ -13,44 +13,44 @@ local base = {
 }
 
 local global = {
-    markdown_syntax_conceal = false,
-    mkdp_auto_start = false,
-    one_allow_italics = true,
-    override_nvim_web_devicons = false,
-    table_mode_corner = "|",
-    vim_json_syntax_conceal = false,
+  markdown_syntax_conceal = false,
+  mkdp_auto_start = false,
+  one_allow_italics = true,
+  override_nvim_web_devicons = false,
+  table_mode_corner = "|",
+  vim_json_syntax_conceal = false,
 }
 
 local blacklisted = {
-    "2html_plugin",
-    "bugreport",
-    "compiler",
-    "fzf",
-    "getscript",
-    "getscriptPlugin",
-    "gzip",
-    "logipat",
-    "matchit",
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
-    "optwin",
-    "rplugin",
-    "rrhelper",
-    "spellfile_plugin",
-    "synmenu",
-    "tar",
-    "tarPlugin",
-    "vimball",
-    "vimballPlugin",
-    "zip",
-    "zipPlugin",
+  "2html_plugin",
+  "bugreport",
+  "compiler",
+  "fzf",
+  "getscript",
+  "getscriptPlugin",
+  "gzip",
+  "logipat",
+  "matchit",
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "optwin",
+  "rplugin",
+  "rrhelper",
+  "spellfile_plugin",
+  "synmenu",
+  "tar",
+  "tarPlugin",
+  "vimball",
+  "vimballPlugin",
+  "zip",
+  "zipPlugin",
 }
 
 local providers = {
-    "perl",
-    "ruby",
+  "perl",
+  "ruby",
 }
 
 for opt, value in pairs(base) do
@@ -58,15 +58,15 @@ for opt, value in pairs(base) do
 end
 
 for opt, value in pairs(global) do
-    vim.g[opt] = value
+  vim.g[opt] = value
 end
 
 for _, plugin in ipairs(blacklisted) do
-    vim.g["loaded_" .. plugin] = 1
+  vim.g["loaded_" .. plugin] = 1
 end
 
 for _, provider in ipairs(providers) do
-    vim.g["loaded_" .. provider .. "_provider"] = 0
+  vim.g["loaded_" .. provider .. "_provider"] = 0
 end
 
 -- don't show redundant messages from ins-completion-menu
@@ -92,13 +92,13 @@ Map("i", "<C-D>", "<Nop>")
 
 -- set user's map leader key
 if Env and Env.g.mapleader ~= nil then
-    Map({ "n", "x", "v" }, Env.g.mapleader, "<Nop>")
-    vim.g.mapleader = Env.g.mapleader
-    vim.g.maplocalleader = Env.g.maplocalleader
+  Map({ "n", "x", "v" }, Env.g.mapleader, "<Nop>")
+  vim.g.mapleader = Env.g.mapleader
+  vim.g.maplocalleader = Env.g.maplocalleader
 else
-    Map({ "n", "x", "v" }, " ", "<Nop>")
-    vim.g.mapleader = " "
-    vim.g.maplocalleader = " "
+  Map({ "n", "x", "v" }, " ", "<Nop>")
+  vim.g.mapleader = " "
+  vim.g.maplocalleader = " "
 end
 
 Log("Override default!", "^ ROOT")

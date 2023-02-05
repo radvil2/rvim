@@ -1,18 +1,3 @@
--- if Env.theme.transparentbg then
---   autocmd("BufEnter", {
---     group = augroup("MyHighlights", {}),
---     pattern = "*",
---     callback = function()
---       -- SetHl("NormalFloat", { bg = "NONE", fg = "#89B4FA" })
---       SetHl("TreesitterContext", { bg = "NONE", fg = "#c0ffee" })
---       SetHl("BufferLineBackground", { bg = "NONE", fg = "#45475A" })
---       SetHl("BufferLineSeparator", { bg = "NONE", fg = "#272727" })
---       SetHl("BufferLineSeparatorSelected", { bg = "NONE", fg = "#272727" })
---       -- SetHl("StatusLine", { bg = "NONE" })
---     end,
---   })
--- end
-
 -- Check if we need to reload the file when it changed
 CreateAutoCmd({
   "FocusGained",
@@ -79,7 +64,7 @@ CreateAutoCmd("FileType", {
 })
 
 CreateAutoCmd("BufReadPre", {
-	once = true,
+  once = true,
   pattern = "*",
   group = Api.nvim_create_augroup("MySetCursorLine", {}),
   callback = function()

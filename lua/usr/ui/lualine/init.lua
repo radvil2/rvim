@@ -2,6 +2,10 @@
 local M = {}
 local env = Env.editor.statusline
 
+M.id = "nvim-lualine/lualine.nvim"
+
+M.dependencies = { "arkav/lualine-lsp-progress" }
+
 M.opts = {}
 
 if env.variant == "rainbow" then
@@ -11,9 +15,9 @@ else
 end
 
 M.repo = {
-	"nvim-lualine/lualine.nvim",
+	M.id,
+	dependencies = M.dependencies,
 	enabled = env.enable,
-	dependencies = { "arkav/lualine-lsp-progress" },
 	opts = M.opts,
 }
 

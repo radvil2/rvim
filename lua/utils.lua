@@ -22,6 +22,16 @@ function M.float_term(cmd, opts)
   )
 end
 
+---@param name string
+function M.opts(name)
+  local pkg = require("lazy.core.config").plugins[name]
+  if not pkg then
+    return {}
+  end
+  local plugin = require("lazy.core.plugin")
+  return plugin.values(pkg, "opts", false)
+end
+
 ---@param silent boolean?
 ---@param values? {[1]:any, [2]:any}
 function M.toggle(option, silent, values)
@@ -125,6 +135,27 @@ function M.quit_editor()
     end)
   else
     vim.cmd("qa!")
+  end
+end
+
+-- this will return a function that calls telescope.
+-- cwd will defautlt to util.get_root
+-- for `files`, git_files or find_files will be chosen depending on .git
+function M.telescope(builtin, opts)
+  local params = { builtin = builtin, opts = opts }
+  return function()
+    builtin = params.builtin
+    opts = params.opts
+    opts = vim.tbl_deep_extend("force", { cwd = M.get_root() }, opts or {})
+    if builtin == "files" then
+      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
+        opts.show_untracked = true
+        builtin = "git_files"
+      else
+        builtin = "find_files"
+      end
+    end
+    require("telescope.builtin")[builtin](opts)
   end
 end
 

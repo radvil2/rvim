@@ -1,5 +1,5 @@
 return {
-	require("vim-startuptime").repo,
-	require("mini-bufremove").repo,
-	require("persistence").repo,
+	require("usr.misc.vim-startuptime").repo,
+	require("usr.misc.mini-bufremove").repo,
+	require("usr.misc.persistence").repo,
 }

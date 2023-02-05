@@ -95,7 +95,7 @@ M.config = function(_, opts)
 		require("usr.lsp.common.keymapper").on_attach(client, buffer)
 	end
 
-	require("utils").on_attach(lsp_attach_fn)
+	require("usr.lsp.common.utils").on_attach(lsp_attach_fn)
 
 	-- Diagnostics
 	for name, icon in pairs(require("media.icons").Diagnostics) do

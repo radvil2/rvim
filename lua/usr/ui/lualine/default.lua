@@ -2,11 +2,12 @@ local icons = require("media.icons")
 local palette = require("media.colors").palette
 local utils = require("usr.ui.lualine.utils")
 local theme = Env.theme.colorscheme
+local env = Env.editor.statusline
 
 return {
   options = {
-    disabled_filetypes = Env.editor.statusline.disabled_filetypes,
-    globalstatus = Env.editor.statusline.is_global or false,
+    disabled_filetypes = env.disabled_filetypes,
+    globalstatus = env.is_global or false,
     component_separators = {
       left = "",
       right = "",
@@ -138,4 +139,3 @@ return {
   inactive_winbar = {},
   extensions = {},
 }
-

@@ -34,10 +34,10 @@ if true then
     foldlevel = 99,
     foldexpr = "nvim_treesitter#foldexpr()",
     -- mousemoveevent = true, -- TODO: for bufferline hover event, but currently doesn't work
-    cmdheight = 0,
+    -- cmdheight = 0,
   }
 
-	vim.g.markdown_recommended_style = 0
+  vim.g.markdown_recommended_style = 0
   for opt, value in pairs(options) do
     vim.opt[opt] = value
   end

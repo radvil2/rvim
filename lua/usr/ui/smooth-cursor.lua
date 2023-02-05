@@ -58,6 +58,7 @@ M.opts = {
 M.repo = {
 	dir = Env.path.home .. "/forks/smooth-cursor.nvim",
 	event = "BufReadPre",
+	opts = M.opts,
 }
 
 return M

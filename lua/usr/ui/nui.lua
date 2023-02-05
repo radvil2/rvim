@@ -2,8 +2,8 @@
 local M = {}
 
 M.repo = {
-	"MunifTanjim/nui.nvim",
-	lazy = true,
+  "MunifTanjim/nui.nvim",
+  lazy = true,
 }
 
 return M

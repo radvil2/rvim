@@ -31,8 +31,8 @@ Map("n", "<A-Cr>", "o<Esc>", { desc = "Add one line down" })
 
 -- Center search result
 if not util.has("mini.animate") then
-	Map("n", "n", "nzz", { nowait = true, desc = "Show + center search results" })
-	Map("n", "N", "Nzz", { nowait = true, desc = "Show + center search results" })
+  Map("n", "n", "nzz", { nowait = true, desc = "Show + center search results" })
+  Map("n", "N", "Nzz", { nowait = true, desc = "Show + center search results" })
 end
 
 -- Test selection
@@ -49,10 +49,10 @@ Map("v", ">", ">gv", { desc = "Indent Right" })
 
 -- Move to window using the <ctrl> hjkl keys
 if not util.has("vim-tmux-navigator") then
-	Map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
-	Map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
-	Map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
-	Map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+  Map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+  Map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
+  Map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
+  Map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 end
 
 -- Move Lines
@@ -76,8 +76,8 @@ Map("n", "[b", "<Cmd>bprevious<Cr>", { desc = "Prev buffer" })
 Map("n", "]b", "<Cmd>bnext<Cr>", { desc = "Next buffer" })
 
 if not util.has("mini.bufremove") then
-	Map("n", "<Leader>bd", "<Cmd>bdelete<Cr>", { desc = "Delete current buffer" })
-	Map("n", "<Leader>bD", "<Cmd>bufdo bdelete<Cr>", { desc = "Delete all buffers" })
+  Map("n", "<Leader>bd", "<Cmd>bdelete<Cr>", { desc = "Delete current buffer" })
+  Map("n", "<Leader>bD", "<Cmd>bufdo bdelete<Cr>", { desc = "Delete all buffers" })
 end
 
 -- Toggle options TODO: define this formatter!
@@ -128,6 +128,6 @@ Map("n", "<Leader>T", function()
 end, { desc = "Open terminal (cwd)" })
 
 -- Quit with prompt
-Map({ "n", "v", "x" }, "ZZ", function ()
-	util.quit_editor()
+Map({ "n", "v", "x" }, "ZZ", function()
+  util.quit_editor()
 end, { desc = "Quit with prompt" })

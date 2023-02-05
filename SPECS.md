@@ -51,6 +51,7 @@
 - [x] RRethy/vim-illuminate
 - [x] folke/trouble.nvim
 - [x] folke/todo-comments.nvim
+- [x] ThePrimeagen/harpoon
 - [x] nvim-treesitter/nvim-treesitter
   - [x] JoosepAlviste/nvim-ts-context-commentstring
   - [x] nvim-treesitter/nvim-treesitter-textobjects

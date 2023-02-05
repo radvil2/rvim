@@ -1,47 +1,39 @@
 local M = {}
 local env = Env.theme
-local variant = env.colorvariant or "nightfox"
-local transbg = env.transparentbg
-local darkmode = env.darkmode
 
-M.opts = {
-	options = {
-		compile_path = Env.path.cache .. "/nightfox",
-		compile_file_suffix = "_compiled",
-		transparent = transbg,
-		terminal_colors = true,
-		dim_inactive = false,
-		inverse = {
-			match_paren = false,
-			visual = false,
-			search = true,
-		},
-		styles = {
-			comments = "italic",
-		},
-	},
-}
+M.id = "EdenEast/nightfox.nvim"
 
-if not darkmode then
-	variant = "dayfox"
-	transbg = false
+M.opts = function()
+  return {
+    options = {
+      transparent = env.transparentbg and env.darkmode,
+      compile_path = Env.path.cache .. "/nightfox",
+      compile_file_suffix = "_compiled",
+      terminal_colors = true,
+      dim_inactive = false,
+      inverse = {
+        match_paren = false,
+        visual = false,
+        search = true,
+      },
+      styles = {
+        comments = "italic",
+      },
+    },
+  }
 end
 
+---@type LazySpec
 M.repo = {
-	"EdenEast/nightfox.nvim",
-	lazy = env.colorscheme ~= "nightfox",
-	config = function()
-		local nightfox = Call("nightfox")
-		if not nightfox then
-			vim.notify("nightfox was not installed!", vim.log.levels.ERROR)
-			return
-		end
-		nightfox.setup(M.opts)
-		if env.colorscheme == "nightfox" then
-			vim.cmd("colorscheme " .. variant)
-			SetHl("Search", { bg = "NONE" })
-		end
-	end,
+  M.id,
+  opts = M.opts,
+  event = "VeryLazy", --TODO: set condition only if selected
+  init = function()
+    if env.colorscheme == "nightfox" then
+      vim.cmd("colorscheme " .. env.variant)
+      -- SetHl("Search", { bg = "NONE" })
+    end
+  end,
 }
 
 return M
